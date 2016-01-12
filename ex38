@@ -1,0 +1,57 @@
+import random
+from sys import exit
+
+list10 = list(range(1,11))
+decknum = []
+deck = []
+
+for item in list10:
+	item = str(item)
+	decknum.append(item)
+	
+decknum.append('jack')
+decknum.append('queen')
+decknum.append('king')
+decknum.append('ace')
+
+for item in decknum:
+	itemh = item + " of hearts"
+	deck.append(itemh)	
+	itemd = item + " of diamonds"
+	deck.append(itemd)	
+	itemsp = item + " of spades"
+	deck.append(itemsp)	
+	itemc = item + " of clubs"
+	deck.append(itemc)
+
+
+
+
+
+def cardguess():
+	print """
+Let's play a game. Pick a random card.
+Use the format: '6 of clubs' or 'ace of spades'.
+If you give up, just say so.
+	"""
+	card = random.choice(deck)
+	cardnum = 1
+	while True:
+		usercard = raw_input("> ").lower()
+		if usercard == card:
+			print "Wow! Well done! You win! It only took you %d tries." % cardnum
+			exit()
+		elif "give up" in usercard:
+			print "Oh well. You tried. The card was: %s." % card
+			print "'Try again' or exit."
+			x = raw_input(" ").lower()
+			if x == "try again":
+				cardguess()
+			else:
+				exit()
+			
+		else:
+			print "No, that's not it."
+			cardnum = cardnum + 1
+	
+cardguess()
